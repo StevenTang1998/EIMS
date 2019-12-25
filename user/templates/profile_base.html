@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+        <div class="col">
+            <h1 class="text-center">{{ request.session.user_name }}!  欢迎回来！</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="nav nav-pills nav-stacked text-center">
+                    <li role="presentation" {% block personal_info %}{% endblock %}>
+                        <a href="{% url 'profile' %}">个人信息</a>
+                    </li>
+                    <li role="presentation" {% block belong %}{% endblock %}>
+                        {% if user.belong %}
+                            <a href="{% url 'modify' %}">
+                                修改公司信息
+                            </a>
+                        {% else %}
+                            <a href="{% url 'bind' %}">
+                                绑定公司
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li role="presentation">
+                        <a href="{% url 'logout' %}">登出</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <form class="form" {% block form_action %}{% endblock %} method="post">
+                    {% if message %}
+                        <div class="alert alert-warning">{{ message }}</div>
+                    {% endif %}
+
+                    {% csrf_token %}
+
+                    {% block form_group %}{% endblock %}
+
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

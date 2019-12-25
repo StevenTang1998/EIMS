@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block css %}<link href="{% static 'css/homepage.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %}全国企业信息管理系统{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">
+                全国企业信息管理系统
+            </h1>
+            <form class="form-horizontal" action="/" method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="sr-only" for="{{ search_form.search_type.id_for_label }}">
+                        {{ search_form.search_type.label }}
+                    </label>
+                    <div class="col-md-2 search-type">
+                        {{ search_form.search_type }}
+                    </div>
+                    <label class="sr-only" for="{{ search_form.name.id_for_label }}">
+                        {{ search_form.name.label }}
+                    </label>
+                    <div class="col-md-8">
+                        {{ search_form.name }}
+                    </div>
+                    <div class="col-md-2 submit">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">搜索</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ search_form.province.label_tag }}
+                    {{ search_form.province }}
+                </div>
+
+                <div class="form-group">
+                    {{ search_form.industry.label_tag }}
+                    {{ search_form.industry }}
+                </div>
+
+                <div class="form-group">
+                    {{ search_form.capital.label_tag }}
+                    {{ search_form.capital }}
+                </div>
+
+                <div class="form-group">
+                    {{ search_form.company_type.label_tag }}
+                    {{ search_form.company_type }}
+                </div>
+
+                <div class="form-group">
+                    {{ search_form.operating_status.label_tag }}
+                    {{ search_form.operating_status }}
+                </div>
+            </form>
+        </div>
+{#        <h1 class="align-items-center text-center">欢迎</h1>#}
+    </div>
+{% endblock %}

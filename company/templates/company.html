@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block css %}<link href="{% static 'css/company.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                企业基本信息
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>统一社会信用代码</th>
+                            <td>{{ company.uniform_social_credit_code }}</td>
+                            <th>企业名称</th>
+                            <td>{{ company.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>注册资本</th>
+                            <td>{{ company.registered_capital }}</td>
+                            <th>实缴资本</th>
+                            <td>{{ company.paid_up_capital }}</td>
+                        </tr>
+                        <tr>
+                            <th>企业类型</th>
+                            <td>{{ company.company_type }}</td>
+                            <th>所属行业</th>
+                            <td>{{ company.industry }}</td>
+                        </tr>
+                        <tr>
+                            <th>电话</th>
+                            <td>{{ company.tel }}</td>
+                            <th>邮箱</th>
+                            <td>{{ company.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>地址</th>
+                            <td>
+                                {% if company.province != company.city %}{{ company.province }}{% endif %}
+                                {{ company.city }}{{ company.district }}{{ company.detail_address }}
+                            </td>
+                            <th>经营状态</th>
+                            <td>{{ company.operating_status }}</td>
+                        </tr>
+                        <tr>
+                            <th>工商注册号</th>
+                            <td>{{ company.business_registration_number }}</td>
+                            <th>登记机关</th>
+                            <td>{{ company.registration_authority }}</td>
+                        </tr>
+                        <tr>
+                            <th>经营范围</th>
+                            <td colspan="3">{{ company.business_scope }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                主要人员
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>姓名</th>
+                        <th>职位</th>
+                    </thead>
+
+                    <tbody>
+                        {% for serving_item in company.serving_set.all %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'human:detail' serving_item.human_name %}">
+                                        {{ serving_item.human_name }}
+                                    </a>
+                                </td>
+                                <td>{{ serving_item.position }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                注册商标
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>商标</th>
+                        <th>商标名称</th>
+                        <th>注册号</th>
+                        <th>国际分类</th>
+                        <th>商标流程</th>
+                        <th>商标状态</th>
+                    </thead>
+
+                    <tbody>
+                        {% for trademark_item in company.trademark_set.all %}
+                            {% for classification_item in trademark_item.classification_set.all %}
+                                <tr>
+                                    <td><img width="50px" src="{{ trademark_item.image_url }}" /></td>
+                                    <td>{{ trademark_item.name }}</td>
+                                    <td>{{ trademark_item.id }}</td>
+                                    <td>{{ classification_item.classification }}</td>
+                                    <td>{{ classification_item.process }}</td>
+                                    <td>{{ classification_item.status }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                企业变更信息
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>变更日期</th>
+                        <th>变更项目</th>
+                        <th>变更前</th>
+                        <th>变更后</th>
+                        <th>创建日期</th>
+                    </thead>
+
+                    <tbody>
+                        {% for change_item in company.change_set.all %}
+                            <tr>
+                                <td>{{ change_item.change_date }}</td>
+                                <td>{{ change_item.change_item }}</td>
+                                <td>{{ change_item.before_change }}</td>
+                                <td>{{ change_item.after_change }}</td>
+                                <td>{{ change_item.create_date }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

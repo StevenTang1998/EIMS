@@ -1,0 +1,14 @@
+{% extends 'profile_base.html' %}
+
+{% block title %}绑定公司{% endblock %}
+
+{% block belong %}class="active"{% endblock %}
+
+{% block form_action %}action="{% url 'bind' %}"{% endblock %}
+
+{% block form_group %}
+    <div class="form-group">
+        {{ bind_form.company_name.label_tag }}
+        {{ bind_form.company_name }}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'profile_base.html' %}
+
+{% block title %}个人信息{% endblock %}
+
+{% block personal_info %}class="active"{% endblock %}
+
+{% block form_action %}action="{% url 'profile' %}"{% endblock %}
+
+{% block form_group %}
+    {% for field in profile_form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+    {% endfor %}
+{% endblock %}

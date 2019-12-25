@@ -1,0 +1,16 @@
+{% extends 'profile_base.html' %}
+
+{% block title %}修改公司信息{% endblock %}
+
+{% block belong %}class="active"{% endblock %}
+
+{% block form_action %}action="{% url 'modify' %}"{% endblock %}
+
+{% block form_group %}
+    {% for field in company_form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+    {% endfor %}
+{% endblock %}
