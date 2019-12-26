@@ -13,7 +13,7 @@
             </div>
 
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered company_info">
                     <tbody>
                         <tr>
                             <th>统一社会信用代码</th>
@@ -42,8 +42,7 @@
                         <tr>
                             <th>地址</th>
                             <td>
-                                {% if company.province != company.city %}{{ company.province }}{% endif %}
-                                {{ company.city }}{{ company.district }}{{ company.detail_address }}
+                                {% if company.province != company.city %}{{ company.province }}{% endif %}{{ company.city }}{{ company.district }}{{ company.detail_address }}
                             </td>
                             <th>经营状态</th>
                             <td>{{ company.operating_status }}</td>
@@ -131,7 +130,7 @@
             </div>
 
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered change_info">
                     <thead>
                         <th>变更日期</th>
                         <th>变更项目</th>

@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from .models import Company, Change, Trademark, Classification
-from .forms import CompanyForm
+from .models import Company
 from django.db.models import Q
 
 
@@ -40,4 +39,5 @@ def search_company(request, name, province, industry, capital, company_type, ope
 
 def company_detail(request, pk):
     company = get_object_or_404(Company, pk=pk)
+    model = Company
     return render(request, 'company.html', locals())
