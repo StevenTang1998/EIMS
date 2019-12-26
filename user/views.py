@@ -3,7 +3,8 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from .models import User
 from company.models import Company
-from .forms import SearchForm
+from .forms import SearchCompanyForm
+from .forms import SearchHumanForm
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import ProfileForm
@@ -21,26 +22,42 @@ def hash_code(s, salt='ruc'):
 
 def homepage(request):
     if request.method == 'POST':
-        search_form = SearchForm(request.POST)
+        search_form = SearchCompanyForm(request.POST)
         if search_form.is_valid():
-            search_type = search_form.cleaned_data.get('search_type')
+            # search_type = search_form.cleaned_data.get('search_type')
             name = search_form.cleaned_data.get('name')
-            if search_type == 'company':
-                args = (name,
-                        search_form.cleaned_data.get('province'),
-                        search_form.cleaned_data.get('industry'),
-                        search_form.cleaned_data.get('capital'),
-                        search_form.cleaned_data.get('company_type'),
-                        search_form.cleaned_data.get('operating_status'),
-                        1)
-                return redirect(reverse('company:search', args=args))
-            else:
-                return redirect(reverse('human:detail', args=(name,)))
+            # if search_type == 'company':
+            args = (name,
+                    search_form.cleaned_data.get('province'),
+                    search_form.cleaned_data.get('industry'),
+                    search_form.cleaned_data.get('capital'),
+                    search_form.cleaned_data.get('company_type'),
+                    search_form.cleaned_data.get('operating_status'),
+                    1)
+            return redirect(reverse('company:search', args=args))
+            # else:
+            #     return redirect(reverse('human:detail', args=(name,)))
         else:
             return redirect('root')
 
-    search_form = SearchForm()
+    search_form = SearchCompanyForm()
     return render(request, 'homepage.html', locals())
+
+
+def search_human(request):
+    if request.method == 'POST':
+        search_form = SearchHumanForm(request.POST)
+        if search_form.is_valid():
+            name = search_form.cleaned_data.get('name')
+            args = (name,
+                    search_form.cleaned_data.get('position'),
+                    1)
+            return redirect(reverse('human:search', args=args))
+        else:
+            return redirect('search_human')
+
+    search_form = SearchHumanForm()
+    return render(request, 'homepage_human.html', locals())
 
 
 def register(request):

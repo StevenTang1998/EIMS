@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block css %}<link href="{% static 'css/homepage.css' %}" rel="stylesheet">{% endblock %}
+
+{% block title %}全国企业信息管理系统{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">
+                全国企业信息管理系统
+            </h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="/">查公司</a></li>
+                <li role="presentation" class="active"><a href="#">查老板</a></li>
+            </ul>
+            <form class="form-horizontal" action="{% url 'search_human' %}" method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="sr-only" for="{{ search_form.name.id_for_label }}">
+                        {{ search_form.name.label }}
+                    </label>
+                    <div class="col-md-10 search-name">
+                        {{ search_form.name }}
+                    </div>
+                    <div class="col-md-2 submit">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">搜索</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        {{ search_form.position.label_tag }}
+                        {{ search_form.position }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

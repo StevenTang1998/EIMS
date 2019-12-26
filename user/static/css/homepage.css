@@ -1,4 +1,9 @@
-.search-type, .submit {
+.submit {
     padding-left: 0px;
+    /*padding-right: 0px;*/
+}
+
+.search-name {
+    /*padding-left: 0px;*/
     padding-right: 0px;
 }
