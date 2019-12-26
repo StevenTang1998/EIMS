@@ -21,10 +21,11 @@ def search_company(request, name, province, industry, capital, company_type, ope
             query &= Q(company_type=company_type)
         if operating_status != '不限':
             query &= Q(operating_status=operating_status)
-        company_count = Company.objects.filter(query).count()
-        company_list = Company.objects.filter(query)[(page - 1) * entry_per_page: page * entry_per_page]
+        total_company_list = Company.objects.filter(query)
+        company_count = total_company_list.count()
         total_page = (company_count + entry_per_page - 1) // entry_per_page
         page = min(max(page, 1), total_page)
+        company_list = total_company_list[(page - 1) * entry_per_page: page * entry_per_page]
         pre_page, next_page = page - 1, page + 1
         if total_page < 5:
             page_list = list(range(1, total_page + 1))

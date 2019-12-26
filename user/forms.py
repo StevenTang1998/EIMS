@@ -3,19 +3,20 @@ from captcha.fields import CaptchaField
 from captcha.fields import CaptchaTextInput
 from .models import User
 from company.models import Company
-from django.db.models import Count
+from human.models import Serving
+# from django.db.models import Count
 
 
-class SearchForm(forms.Form):
-    search_type_choice = (
-        ('company', '查企业'),
-        ('human', '查老板'),
-    )
-    search_type = forms.ChoiceField(label='查询类型', choices=search_type_choice,
-                                    widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+class SearchCompanyForm(forms.Form):
+    # search_type_choice = (
+    #     ('company', '查企业'),
+    #     ('human', '查老板'),
+    # )
+    # search_type = forms.ChoiceField(label='查询类型', choices=search_type_choice,
+    #                                 widget=forms.Select(attrs={'class': 'form-control input-lg'}))
     name = forms.CharField(label='名字', max_length=128,
                            widget=forms.TextInput(attrs={'class': 'form-control input-lg',
-                                                         'placeholder': '请输入公司名称或老板姓名',
+                                                         'placeholder': '请输入公司名称',
                                                          'autofocus': ''}))
     province_choice = (('不限', '不限'),) + tuple(Company.objects.all()
                                               .values_list('province', 'province')
@@ -51,6 +52,19 @@ class SearchForm(forms.Form):
                                                       .distinct())
     operating_status = forms.ChoiceField(label='企业经营状况', choices=operating_status_choice,
                                          widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+
+
+class SearchHumanForm(forms.Form):
+    name = forms.CharField(label='名字', max_length=128,
+                           widget=forms.TextInput(attrs={'class': 'form-control input-lg',
+                                                         'placeholder': '请输入老板姓名',
+                                                         'autofocus': ''}))
+    position_choice = (('不限', '不限'),) + tuple(Serving.objects.all()
+                                              .values_list('position', 'position')
+                                              .exclude(position='')
+                                              .distinct())
+    position = forms.ChoiceField(label='职位', choices=position_choice,
+                                 widget=forms.Select(attrs={'class': 'form-control input-lg'}))
 
 
 class UserForm(forms.Form):
