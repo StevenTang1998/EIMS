@@ -14,6 +14,7 @@
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active"><a href="#">查公司</a></li>
                 <li role="presentation"><a href="{% url 'search_human' %}">查老板</a></li>
+                <li role="presentation"><a href="{% url 'statistic' %}">查行业</a></li>
             </ul>
             <form class="form-horizontal" action="/" method="post">
                 {% csrf_token %}

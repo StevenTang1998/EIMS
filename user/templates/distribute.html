@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/china.js' %}"></script>
+{% endblock %}
+
+{% block title %}行业统计{% endblock %}
+
+{% block body %}
+    <div class="container" style="width: 100%">
+        {{ industry_div | safe }}
+    </div>
+    {{ industry_script | safe }}
+
+    <div class="container">
+        {{ province_div | safe }}
+    </div>
+    {{ province_script | safe }}
+
+    <div class="container" style="width: 100%">
+        {{ capital_div | safe }}
+    </div>
+    {{ capital_script | safe }}
+{% endblock %}

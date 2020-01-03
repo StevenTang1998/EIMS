@@ -4,67 +4,78 @@ from captcha.fields import CaptchaTextInput
 from .models import User
 from company.models import Company
 from human.models import Serving
-# from django.db.models import Count
 
 
 class SearchCompanyForm(forms.Form):
-    # search_type_choice = (
-    #     ('company', '查企业'),
-    #     ('human', '查老板'),
+    pass
+    # name = forms.CharField(label='名字', max_length=128,
+    #                        widget=forms.TextInput(attrs={'class': 'form-control input-lg',
+    #                                                      'placeholder': '请输入公司名称',
+    #                                                      'autofocus': ''}))
+    # province_choice = (('不限', '不限'),) + tuple(Company.objects.all()
+    #                                           .values_list('province', 'province')
+    #                                           .exclude(province='')
+    #                                           .distinct())
+    # province = forms.ChoiceField(label='省份地区', choices=province_choice,
+    #                              widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+    # industry_choice = (('不限', '不限'),) + tuple(Company.objects.all()
+    #                                           .values_list('industry', 'industry')
+    #                                           .exclude(industry='')
+    #                                           .distinct())
+    # industry = forms.ChoiceField(label='行业分类', choices=industry_choice,
+    #                              widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+    # capital_choice = (
+    #     ('不限', '不限'),
+    #     ('0', '0～100万'),
+    #     ('1', '100～200万'),
+    #     ('2', '200～500万'),
+    #     ('3', '500～1000万'),
+    #     ('4', '1000万以上'),
     # )
-    # search_type = forms.ChoiceField(label='查询类型', choices=search_type_choice,
-    #                                 widget=forms.Select(attrs={'class': 'form-control input-lg'}))
-    name = forms.CharField(label='名字', max_length=128,
-                           widget=forms.TextInput(attrs={'class': 'form-control input-lg',
-                                                         'placeholder': '请输入公司名称',
-                                                         'autofocus': ''}))
-    province_choice = (('不限', '不限'),) + tuple(Company.objects.all()
-                                              .values_list('province', 'province')
-                                              .exclude(province='')
-                                              .distinct())
-    province = forms.ChoiceField(label='省份地区', choices=province_choice,
-                                 widget=forms.Select(attrs={'class': 'form-control input-lg'}))
-    industry_choice = (('不限', '不限'),) + tuple(Company.objects.all()
-                                              .values_list('industry', 'industry')
-                                              .exclude(industry='')
-                                              .distinct())
-    industry = forms.ChoiceField(label='行业分类', choices=industry_choice,
-                                 widget=forms.Select(attrs={'class': 'form-control input-lg'}))
-    capital_choice = (
-        ('不限', '不限'),
-        ('0', '0～100万'),
-        ('1', '100～200万'),
-        ('2', '200～500万'),
-        ('3', '500～1000万'),
-        ('4', '1000万以上'),
-    )
-    capital = forms.ChoiceField(label='注册资本', choices=capital_choice,
-                                widget=forms.Select(attrs={'class': 'form-control input-lg'}))
-    company_type_choice = (('不限', '不限'),) + tuple(Company.objects.all()
-                                                  .values_list('company_type', 'company_type')
-                                                  .exclude(company_type='')
-                                                  .distinct())
-    company_type = forms.ChoiceField(label='企业类型', choices=company_type_choice,
-                                     widget=forms.Select(attrs={'class': 'form-control input-lg'}))
-    operating_status_choice = (('不限', '不限'),) + tuple(Company.objects.all()
-                                                      .values_list('operating_status', 'operating_status')
-                                                      .exclude(operating_status='')
-                                                      .distinct())
-    operating_status = forms.ChoiceField(label='企业经营状况', choices=operating_status_choice,
-                                         widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+    # capital = forms.ChoiceField(label='注册资本', choices=capital_choice,
+    #                             widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+    # company_type_choice = (('不限', '不限'),) + tuple(Company.objects.all()
+    #                                               .values_list('company_type', 'company_type')
+    #                                               .exclude(company_type='')
+    #                                               .distinct())
+    # company_type = forms.ChoiceField(label='企业类型', choices=company_type_choice,
+    #                                  widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+    # operating_status_choice = (('不限', '不限'),) + tuple(Company.objects.all()
+    #                                                   .values_list('operating_status', 'operating_status')
+    #                                                   .exclude(operating_status='')
+    #                                                   .distinct())
+    # operating_status = forms.ChoiceField(label='企业经营状况', choices=operating_status_choice,
+    #                                      widget=forms.Select(attrs={'class': 'form-control input-lg'}))
 
 
 class SearchHumanForm(forms.Form):
-    name = forms.CharField(label='名字', max_length=128,
-                           widget=forms.TextInput(attrs={'class': 'form-control input-lg',
-                                                         'placeholder': '请输入老板姓名',
-                                                         'autofocus': ''}))
-    position_choice = (('不限', '不限'),) + tuple(Serving.objects.all()
-                                              .values_list('position', 'position')
-                                              .exclude(position='')
-                                              .distinct())
-    position = forms.ChoiceField(label='职位', choices=position_choice,
-                                 widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+    pass
+    # name = forms.CharField(label='名字', max_length=128,
+    #                        widget=forms.TextInput(attrs={'class': 'form-control input-lg',
+    #                                                      'placeholder': '请输入老板姓名',
+    #                                                      'autofocus': ''}))
+    # position_choice = (('不限', '不限'),) + tuple(Serving.objects.all()
+    #                                           .values_list('position', 'position')
+    #                                           .exclude(position='')
+    #                                           .distinct())
+    # position = forms.ChoiceField(label='职位', choices=position_choice,
+    #                              widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+
+
+class StatisticForm(forms.Form):
+    pass
+    # industry_choice = (('不限', '不限'),) + tuple(Company.objects.all()
+    #                                           .values_list('industry', 'industry')
+    #                                           .exclude(industry='')
+    #                                           .distinct())
+    # industry = forms.ChoiceField(label='行业分类', choices=industry_choice,
+    #                              widget=forms.Select(attrs={'class': 'form-control input-lg'}))
+    # province_choice = (('不限', '不限'),) + tuple(Company.objects.all()
+    #                                           .values_list('province', 'province')
+    #                                           .exclude(province='')
+    #                                           .distinct())
+    # province = forms.ChoiceField(label='省份地区', choices=province_choice,
+    #                              widget=forms.Select(attrs={'class': 'form-control input-lg'}))
 
 
 class UserForm(forms.Form):

@@ -12,8 +12,9 @@
                 全国企业信息管理系统
             </h1>
             <ul class="nav nav-tabs">
-                <li role="presentation"><a href="/">查公司</a></li>
+                <li role="presentation"><a href="{% url 'root' %}">查公司</a></li>
                 <li role="presentation" class="active"><a href="#">查老板</a></li>
+                <li role="presentation"><a href="{% url 'statistic' %}">查行业</a></li>
             </ul>
             <form class="form-horizontal" action="{% url 'search_human' %}" method="post">
                 {% csrf_token %}
