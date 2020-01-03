@@ -1,15 +1,21 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.db.models import Q, Count
 from .models import User
 from company.models import Company
 from .forms import SearchCompanyForm
 from .forms import SearchHumanForm
+from .forms import StatisticForm
 from .forms import UserForm
 from .forms import RegisterForm
 from .forms import ProfileForm
 from .forms import BindForm
 from company.forms import CompanyForm
+from .search_industry import industry_distribute, province_distribute, draw_capital
+
+from pyecharts.charts import Geo, Pie, Bar
+from pyecharts import options as opts
 import hashlib
 
 
@@ -196,3 +202,37 @@ def modify(request):
         company_form = CompanyForm(instance=user.belong)
 
     return render(request, 'modify.html', locals())
+
+
+def statistic(request):
+    if request.method == 'POST':
+        search_form = StatisticForm(request.POST)
+        if search_form.is_valid():
+            args = (search_form.cleaned_data.get('industry'),
+                    search_form.cleaned_data.get('province'),
+                    )
+            return redirect(reverse('distribute', args=args))
+        else:
+            return redirect('statistic')
+
+    search_form = SearchCompanyForm()
+    return render(request, 'statistic.html', locals())
+
+
+def distribute(request, industry, province):
+    industry_query = Q() if industry == '不限' else Q(industry=industry)
+    province_query = Q() if province == '不限' else Q(province=province)
+    industry_info = Company.objects.values_list('industry').filter(province_query).annotate(Count('industry'))
+    province_info = Company.objects.values_list('province').filter(industry_query).annotate(Count('province'))
+    capital = Company.objects.values_list('registered_capital').filter(industry_query & province_query)
+    if industry == '不限' and province == '不限':
+        industry_div, industry_script = industry_distribute(industry_info, province)
+        province_div, province_script = province_distribute(province_info, industry)
+    if industry == '不限' and province != '不限':
+        industry_div, industry_script = industry_distribute(industry_info, province)
+    if industry != '不限' and province == '不限':
+        province_div, province_script = province_distribute(province_info, industry)
+        capital_div, capital_script = draw_capital(capital, province, industry)
+    if industry != '不限' and province != '不限':
+        capital_div, capital_script = draw_capital(capital, province, industry)
+    return render(request, 'distribute.html', locals())

@@ -15,7 +15,7 @@ def search_human(request, name, position, page):
         total_human_list = Serving.objects.filter(query).values_list('human_name').distinct()
         human_count = total_human_list.count()
         total_page = (human_count + entry_per_page - 1) // entry_per_page
-        page = min(max(page, 1), total_page)
+        page = max(min(page, total_page), 1)
         human_list = total_human_list[(page - 1) * entry_per_page: page * entry_per_page]
         pre_page, next_page = page - 1, page + 1
         if total_page < 5:

@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', user_views.homepage, name='root'),
     path('search_human/', user_views.search_human, name='search_human'),
+    path('statistic/', user_views.statistic, name='statistic'),
+    path('distribute/<str:industry>/<str:province>/', user_views.distribute, name='distribute'),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
     path('logout/', user_views.logout, name='logout'),

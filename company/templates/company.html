@@ -23,9 +23,17 @@
                         </tr>
                         <tr>
                             <th>注册资本</th>
-                            <td>{{ company.registered_capital }}</td>
+                            <td>
+                                {% if company.registered_capital %}
+                                    {{ company.registered_capital }}万元
+                                {% endif %}
+                            </td>
                             <th>实缴资本</th>
-                            <td>{{ company.paid_up_capital }}</td>
+                            <td>
+                                {% if company.paid_up_capital %}
+                                    {{ company.paid_up_capital }}万元
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr>
                             <th>企业类型</th>
